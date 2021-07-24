@@ -26,8 +26,22 @@ module.exports.createPages = async ({ graphql, actions }) => {
     //1. Get path to Template
     const blogTemplate = path.resolve('./src/templates/blog.js');
 
-    //2. Get MarkDown Data
+    //2. Get MarkDown/CMS Data
+
     const res = await graphql(`
+ query {
+  allContentfulBlog {
+    edges {
+      node {
+        title
+        slug
+        publishedDate(fromNow: true)
+      }
+    }
+  }
+}
+`)
+   /* const res = await graphql(`
                 
         query {
   allMarkdownRemark {
@@ -40,14 +54,14 @@ module.exports.createPages = async ({ graphql, actions }) => {
     }
   }
 }
- `)
+ `)*/
     //3. Create Pages
-    res.data.allMarkdownRemark.edges.forEach((edge) => {
+    res.data.allContentfulBlog.edges.forEach((edge) => {
         createPage({
             component: blogTemplate,
-            path: `/blog/${edge.node.fields.slug}`,
+            path: `/blog/${edge.node.slug}`,
             context: {
-                slug: edge.node.fields.slug
+                slug: edge.node.slug
             }
         })
     })
