@@ -1,7 +1,6 @@
-
 const path = require('path')
 
-module.exports.onCreateNode = ({ node, actions }) => {
+/*module.exports.onCreateNode = ({ node, actions }) => {
 
     const { createNodeField } = actions
 
@@ -14,11 +13,24 @@ module.exports.onCreateNode = ({ node, actions }) => {
         createNodeField({
             node,
             name: 'slug',
-            value:slug
+            value: slug
         })
-      }
+    }
 }
-
+module.exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+    if (stage === "build-html" || stage === "develop-html") {
+        actions.setWebpackConfig({
+            module: {
+                rules: [
+                    {
+                        test: /bad-module/,
+                        use: loaders.null(),
+                    },
+                ],
+            },
+        })
+    }
+}*/
 module.exports.createPages = async ({ graphql, actions }) => {
 
     const { createPage } = actions;
@@ -41,22 +53,23 @@ module.exports.createPages = async ({ graphql, actions }) => {
   }
 }
 `)
-   /* const res = await graphql(`
-                
-        query {
-  allMarkdownRemark {
-    edges {
-      node {
-        fields {
-          slug
-        }
-      }
-    }
-  }
-}
- `)*/
+    /* const res = await graphql(`
+                 
+         query {
+   allMarkdownRemark {
+     edges {
+       node {
+         fields {
+           slug
+         }
+       }
+     }
+   }
+ }
+  `)*/
     //3. Create Pages
-    res.data.allContentfulBlog.edges.forEach((edge) => {
+    console.log(res);
+    res.data.allContentfulBlog.edges.map((edge) => {
         createPage({
             component: blogTemplate,
             path: `/blog/${edge.node.slug}`,

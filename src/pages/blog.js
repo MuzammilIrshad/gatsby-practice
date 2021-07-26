@@ -1,3 +1,5 @@
+
+
 import React from "react"
 import LayOut from "../components/LayOut";
 import { Link, graphql, useStaticQuery } from 'gatsby'
@@ -7,23 +9,23 @@ import * as blogStyles from './blog.module.scss';
 
 export default function Blog() {
 
-  /*  const data = useStaticQuery(graphql`
-        query {
-  allMarkdownRemark {
-    edges {
-      node {
-        frontmatter {
-            title
-            date
+    /*  const data = useStaticQuery(graphql`
+          query {
+    allMarkdownRemark {
+      edges {
+        node {
+          frontmatter {
+              title
+              date
+          }
+         fields{
+             slug
+         }
         }
-       fields{
-           slug
-       }
       }
     }
   }
-}
-`)*/
+  `)*/
     const data = useStaticQuery(graphql`
     query {
   allContentfulBlog(sort: {fields: publishedDate, order: ASC}) {
@@ -46,13 +48,13 @@ export default function Blog() {
                 {
                     data.allContentfulBlog.edges.map((edge) => {
                         return (
-                            <li className={blogStyles.post}>
+                            <li className={blogStyles.post} key={edge.node.slug}>
                                 <Link to={`/blog/${edge.node.slug}`}>
-                                <h2>{edge.node.title}</h2>
+                                    <h2>{edge.node.title}</h2>
                                     <p>{edge.node.publishedDate}</p>
                                 </Link>
-                              </li>
-                                )
+                            </li>
+                        )
                     })
                 }
             </ol>
