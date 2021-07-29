@@ -2,12 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\develop",
+    "\\develop\\src",
     "\\src",
+    "\\src\\components",
     "\\src\\pages",
     "\\src\\posts",
     "\\src\\posts\\gatsby",
     "\\src\\templates"
   ],
-  "SelectedNode": "\\gatsby-node.js",
+  "SelectedNode": "\\src\\pages\\index.js",
   "PreviewInSolutionExplorer": false
 }

@@ -40,7 +40,7 @@ export default function Blogpost(props) {
             }
         }
     }
-    console.log(query)
+   
     console.log(props);
     return (
         <LayOut>
